@@ -1,0 +1,9 @@
+name: axi
+version: 0.1.0
+
+authors:
+  - Nickolay Ilyushin <nickolay02@inbox.ru>
+
+crystal: 0.23.1
+
+license: MIT
