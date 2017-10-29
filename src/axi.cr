@@ -18,6 +18,9 @@ module Axi
           @on_transform_blocks.each do |block|
             block.call(val, tval)
           end
+          if self.responds_to?(:i_on_transform)
+            self.i_on_transform(val, tval)
+          end
           tval
         else
           nil
@@ -41,7 +44,9 @@ module Axi
       if (tb = @transform_block).is_a?(Proc(I, O))
         return tb.call(val)
       elsif (tb = @transform_block).is_a?(Nil)
-        if (I == O)
+        if self.responds_to?(:fn_transform)
+          return self.fn_transform(val)
+        elsif (I == O)
           return val
         else
           return nil

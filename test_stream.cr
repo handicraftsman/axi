@@ -9,3 +9,12 @@ puts s.send(2).inspect
 s2 = Axi::Stream(Int32, Int32).new
 s2.transform ->(val : Int32) { val * 2 }
 puts s2.send(2).inspect
+
+class Foo < Axi::Stream(Int32, Int32)
+  def i_transform(val)
+    return val ** 2
+  end
+end
+
+s3 = Foo.new
+puts s3.send(5).inspect

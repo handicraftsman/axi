@@ -54,6 +54,10 @@ values to other streams and channels from the standard library.
 stream.link(other_object)
 ```
 
+Subclasses can also define `i_transform(val : I) : O` and `i_on_transform(ival : I, oval : O)`.
+First one gets executed if there's no transform block available, while second one is
+executed after all defined `on_transform` blocks. 
+
 ## Contributing
 
 1. Fork it ( https://github.com/handicraftsman/axi/fork )
