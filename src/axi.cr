@@ -4,6 +4,7 @@ module Axi
   class Stream(I, O)
     def initialize
       @on_transform_blocks = [] of Proc(I, O, Nil)
+      @linked_channels = [] of Channel(O)
     end
 
     def send(val : I, async = false) : Stream(I, O) | O | Nil
@@ -21,11 +22,18 @@ module Axi
           if self.responds_to?(:i_on_transform)
             self.i_on_transform(val, tval)
           end
+          @linked_channels.each do |chan|
+            chan.send(tval)
+          end
           tval
         else
           nil
         end
       end
+    end
+
+    def link(chan : Channel(O))
+      @linked_channels << chan
     end
 
     def link(target)
