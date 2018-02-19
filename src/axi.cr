@@ -32,6 +32,10 @@ module Axi
       end
     end
 
+    def send_async(val : I) : Stream(I, O)
+      send(val, true)
+    end
+
     def link(chan : Channel(O))
       @linked_channels << chan
     end
